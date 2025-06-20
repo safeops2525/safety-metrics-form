@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safety Metrics Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #aaa;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2>Enter Safety Metrics</h2>
+  <form>
+    <label for="month">Month:</label>
+    <input type="month" id="month" name="month" required />
+
+    <label for="hours">Total Hours Worked:</label>
+    <input type="number" id="hours" name="hours" required />
+
+    <label for="firstAid">First Aid Incidents:</label>
+    <input type="number" id="firstAid" name="firstAid" required />
+
+    <label for="ltis">Lost Time Incidents (LTI):</label>
+    <input type="number" id="ltis" name="ltis" required />
+
+    <label for="recordable">Recordable Incidents:</label>
+    <input type="number" id="recordable" name="recordable" required />
+
+    <button type="submit">Calculate & Save</button>
+  </form>
+</body>
+</html>
