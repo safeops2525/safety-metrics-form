@@ -27,28 +27,29 @@
 <script>
   const scriptURL = 'https://script.google.com/macros/s/AKfycbx0U_PF9hjJ_mrC6flEak8iGaZPbpiTUPPo7QF3QQwZtVaBC3AsezHExC9gFznDSUvt/exec';
 
-  document.getElementById('metricsForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+  document.getElementById('metricsForm')
+    .addEventListener('submit', function(e) {
+      e.preventDefault();
 
-    const data = {
-      month: document.getElementById('month').value,
-      hours: document.getElementById('hours').value,
-      firstaid: document.getElementById('firstaid').value,
-      ltis: document.getElementById('ltis').value,
-      recordables: document.getElementById('recordables').value
-    };
+      const data = {
+        month: document.getElementById('month').value,
+        hours: document.getElementById('hours').value,
+        firstaid: document.getElementById('firstaid').value,
+        ltis: document.getElementById('ltis').value,
+        recordables: document.getElementById('recordables').value
+      };
 
-    fetch(scriptURL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(response => response.text())
-    .then(result => alert("Submitted successfully!"))
-    .catch(error => alert("Error: " + error.message));
-  });
+      fetch(scriptURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(r => r.json())
+      .then(result => alert("Submitted successfully!"))
+      .catch(err => alert("Error: " + err.message));
+    });
 </script>
 
 </body>
