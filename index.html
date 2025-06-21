@@ -1,18 +1,54 @@
-<form method="POST" action="https://script.google.com/macros/s/AKfycbxpd1EE7ecwhtsn7nrymMV99Y78DQxZum_5rSFUyrb1c5N9stMS6noxt_dtUVBPFyUb/exec">
-  <label for="month">Month:</label><br>
-  <input type="month" id="month" name="month"><br><br>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Safety Metrics Form</title>
+  </head>
+  <body>
+    <h2>Safety Metrics Submission</h2>
+    <form id="metricsForm">
+      <label for="month">Month:</label><br>
+      <input type="text" id="month" name="month"><br><br>
 
-  <label for="hours">Total Hours Worked:</label><br>
-  <input type="number" id="hours" name="hours"><br><br>
+      <label for="hours">Total Hours Worked:</label><br>
+      <input type="number" id="hours" name="hours"><br><br>
 
-  <label for="firstaid">First Aid Cases:</label><br>
-  <input type="number" id="firstaid" name="firstaid"><br><br>
+      <label for="firstaid">First Aid Cases:</label><br>
+      <input type="number" id="firstaid" name="firstaid"><br><br>
 
-  <label for="ltis">Lost Time Injuries (LTI):</label><br>
-  <input type="number" id="ltis" name="ltis"><br><br>
+      <label for="ltis">Lost Time Injuries (LTI):</label><br>
+      <input type="number" id="ltis" name="ltis"><br><br>
 
-  <label for="recordables">Recordable Injuries:</label><br>
-  <input type="number" id="recordables" name="recordables"><br><br>
+      <label for="recordables">Recordable Injuries:</label><br>
+      <input type="number" id="recordables" name="recordables"><br><br>
 
-  <button type="submit">Submit</button>
-</form>
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbxpd1EE7ecwhtsn7nrymMV99Y78DQxZum_5rSFUyrb1c5N9stMS6noxt_dtUVBPFyUb/exec';
+
+      document.getElementById('metricsForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // prevent default form submission
+
+        const data = {
+          month: document.getElementById('month').value,
+          hours: document.getElementById('hours').value,
+          firstaid: document.getElementById('firstaid').value,
+          ltis: document.getElementById('ltis').value,
+          recordables: document.getElementById('recordables').value
+        };
+
+        fetch(scriptURL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => alert("Submitted successfully!"))
+        .catch(error => alert("Error: " + error.message));
+      });
+    </script>
+  </body>
+</html>
