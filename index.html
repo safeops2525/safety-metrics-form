@@ -18,10 +18,20 @@
     const form = document.getElementById("metricsForm");
     form.addEventListener("submit", e => {
       e.preventDefault();
-      const data = new FormData(form);
+      const data = {
+  month: document.getElementById("month").value,
+  hours: document.getElementById("hours").value,
+  firstaid: document.getElementById("firstaid").value,
+  ltis: document.getElementById("ltis").value,
+  recordables: document.getElementById("recordables").value
+};
       fetch("https://script.google.com/macros/s/AKfycbxvatf4iyvPf8Io3aPYysZoPgH4DNIisxYlG-2dcIczTHKu3yb9cucs5zwRVRfpavGu/exec", {
-        method: "POST",
-        body: data
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data)
+})
       })
       .then(response => response.text())
       .then(msg => alert("Response: " + msg))
