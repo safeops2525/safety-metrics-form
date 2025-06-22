@@ -31,24 +31,16 @@
     .addEventListener('submit', function(e) {
       e.preventDefault();
 
-      const data = {
-        month: document.getElementById('month').value,
-        hours: document.getElementById('hours').value,
-        firstaid: document.getElementById('firstaid').value,
-        ltis: document.getElementById('ltis').value,
-        recordables: document.getElementById('recordables').value
-      };
+      const form = document.getElementById('metricsForm');
+      const formData = new FormData(form);
 
       fetch(scriptURL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        body: formData
       })
-      .then(r => r.json())
+      .then(response => response.text())
       .then(result => alert("Submitted successfully!"))
-      .catch(err => alert("Error: " + err.message));
+      .catch(error => alert("Error: " + error.message));
     });
 </script>
 
