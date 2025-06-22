@@ -1,53 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>Safety Metrics Submission</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f8f9fa;
+    }
+    h2 {
+      color: #333;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 6px;
+      max-width: 600px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
 </head>
 <body>
   <h2>Safety Metrics Submission</h2>
- <form id="metricsForm">
-  <input type="text" id="month" name="month">
-  <input type="number" id="hours" name="hours">
-  <input type="number" id="firstaid" name="firstaid">
-  <input type="number" id="ltis" name="ltis">
-  <input type="number" id="recordables" name="recordables">
-  <button type="submit">Submit</button>
-</form>
+  <form id="metricsForm">
+    <label for="month">Month</label>
+    <input type="text" id="month" name="month" required>
+
+    <label for="hours">Total Hours Worked</label>
+    <input type="number" id="hours" name="hours" required>
+
+    <label for="firstaid">First Aid Cases</label>
+    <input type="number" id="firstaid" name="firstaid" required>
+
+    <label for="ltis">Lost Time Injuries (LTI)</label>
+    <input type="number" id="ltis" name="ltis" required>
+
+    <label for="recordables">Recordable Injuries</label>
+    <input type="number" id="recordables" name="recordables" required>
+
+    <button type="submit">Submit</button>
+  </form>
 
   <script>
-const scriptURL = 'https://script.google.com/macros/s/AKfycbwSym-eKfvUU6EcOkpnHdFTpc1DacRF_26THna6_IaYeyAM97OSaPlZQYnbyOzr5rNc/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx0U_PF9hjJ_mrC6flEak8iGaZPbpiTUPPo7QF3QQwZtVaBC3AsezHExC9gFznDSUvt/exec'; // ✅ Replace with your current URL
 
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('metricsForm');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('metricsForm');
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
 
-      const data = {
-        month: document.getElementById('month').value,
-        hours: document.getElementById('hours').value,
-        firstaid: document.getElementById('firstaid').value,
-        ltis: document.getElementById('ltis').value,
-        recordables: document.getElementById('recordables').value
-      };
+          const data = {
+            month: document.getElementById('month').value,
+            hours: document.getElementById('hours').value,
+            firstaid: document.getElementById('firstaid').value,
+            ltis: document.getElementById('ltis').value,
+            recordables: document.getElementById('recordables').value
+          };
 
-      fetch(https://script.google.com/macros/s/AKfycbwSym-eKfvUU6EcOkpnHdFTpc1DacRF_26THna6_IaYeyAM97OSaPlZQYnbyOzr5rNc/exec, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => response.json())
-      .then(result => {
-        alert("Submitted successfully!");
-      })
-      .catch(error => {
-        alert("Error: " + error.message);
-      });
+          fetch(scriptURL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          })
+          .then(response => response.json())
+          .then(result => {
+            alert("Submitted successfully!");
+            form.reset();
+          })
+          .catch(error => {
+            alert("Error: " + error.message);
+          });
+        });
+      }
     });
-  }
-});
-</script>
+  </script>
 </body>
 </html>
