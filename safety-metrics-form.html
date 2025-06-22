@@ -22,7 +22,7 @@
       e.preventDefault();
 
       const params = new URLSearchParams(new FormData(form)).toString();
-      const scriptURL = "https://script.google.com/macros/s/AKfycbxeIHV1hu-5GeDYjS7AHSTQ9as86wkz3SeqdBCjWDZ-oES4Bsv8bpbkTxM_QFb3c68p/exec" + "?" + params;
+      const scriptURL = "https://script.google.com/macros/s/AKfycbz_ZlFa2P_2CxjkUsKGpKgftZL1ZsQZRoU0zaAxUlgGr08K1LlHezzWmtCURfFMtFX2/exec" + "?" + params;
 
       fetch(scriptURL)
         .then(response => response.json())
