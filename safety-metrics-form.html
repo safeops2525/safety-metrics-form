@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Safety Metrics Submission</title>
+</head>
+<body>
+  <h2>Safety Metrics Submission</h2>
+  <form id="metricsForm">
+    <input type="text" name="month" placeholder="Month" required><br>
+    <input type="number" name="hours" placeholder="Total Hours Worked" required><br>
+    <input type="number" name="firstaid" placeholder="First Aid Cases" required><br>
+    <input type="number" name="ltis" placeholder="Lost Time Injuries" required><br>
+    <input type="number" name="recordables" placeholder="Recordable Injuries" required><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("metricsForm");
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+
+      const params = new URLSearchParams(new FormData(form)).toString();
+      const scriptURL = "https://script.google.com/macros/s/AKfycbxeIHV1hu-5GeDYjS7AHSTQ9as86wkz3SeqdBCjWDZ-oES4Bsv8bpbkTxM_QFb3c68p/exec" + "?" + params;
+
+      fetch(scriptURL)
+        .then(response => response.json())
+        .then(data => {
+          alert("Submitted: " + JSON.stringify(data));
+          form.reset();
+        })
+        .catch(error => alert("Error: " + error));
+    });
+  </script>
+</body>
+</html>
