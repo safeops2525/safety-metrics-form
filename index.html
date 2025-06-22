@@ -15,18 +15,28 @@
   </form>
 
   <script>
-    const form = document.getElementById("metricsForm");
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      const data = new FormData(form);
-      fetch(https://script.google.com/macros/s/AKfycbwSym-eKfvUU6EcOkpnHdFTpc1DacRF_26THna6_IaYeyAM97OSaPlZQYnbyOzr5rNc/exec, {
-        method: "POST",
-        body: data
-      })
-      .then(response => response.text())
-      .then(msg => alert("Response: " + msg))
-      .catch(err => alert("Error: " + err));
-    });
-  </script>
+const scriptURL = 'https://script.google.com/macros/s/AKfycb.../exec'; // your real URL
+
+document.getElementById('metricsForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const data = {
+    month: document.getElementById('month').value,
+    hours: document.getElementById('hours').value,
+    firstaid: document.getElementById('firstaid').value,
+    ltis: document.getElementById('ltis').value,
+    recordables: document.getElementById('recordables').value
+  };
+  fetch(scriptURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(res => alert("Submitted successfully!"))
+  .catch(error => alert("Error: " + error.message));
+});
+</script>
 </body>
 </html>
