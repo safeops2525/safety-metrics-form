@@ -9,28 +9,31 @@
 </form>
 
 <script>
-  const form = document.getElementById("metricsForm");
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("metricsForm");
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-    const data = {
-      month: document.getElementById("month").value,
-      hours: document.getElementById("hours").value,
-      firstaid: document.getElementById("firstaid").value,
-      ltis: document.getElementById("ltis").value,
-      recordables: document.getElementById("recordables").value
-    };
+      const data = {
+        month: document.getElementById("month").value,
+        hours: document.getElementById("hours").value,
+        firstaid: document.getElementById("firstaid").value,
+        ltis: document.getElementById("ltis").value,
+        recordables: document.getElementById("recordables").value
+      };
 
-    fetch("https://script.google.com/macros/s/AKfycbxvatf4iyvPf8Io3aPYysZoPgH4DNIisxYlG-2dcIczTHKu3yb9cucs5zwRVRfpavGu/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    })
-    .then((res) => res.text())
-    .then((msg) => alert("Response: " + msg))
-    .catch((err) => alert("Error: " + err));
+      fetch("https://script.google.com/macros/s/AKfycbxvatf4iyvPf8Io3aPYysZoPgH4DNIisxYlG-2dcIczTHKu3yb9cucs5zwRVRfpavGu/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+        .then((res) => res.text())
+        .then((msg) => alert("Response: " + msg))
+        .catch((err) => alert("Error: " + err.message));
+    });
   });
 </script>
+
