@@ -1,40 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Safety Metrics Form</title>
-  </head>
-  <body>
-    <h2>Safety Metrics Submission</h2>
-    <form id="metricsForm">
-      <input type="text" id="month" name="month" placeholder="Month" required><br><br>
-      <input type="number" id="hours" name="hours" placeholder="Total Hours Worked" required><br><br>
-      <input type="number" id="firstaid" name="firstaid" placeholder="First Aid Cases" required><br><br>
-      <input type="number" id="ltis" name="ltis" placeholder="Lost Time Injuries" required><br><br>
-      <input type="number" id="recordables" name="recordables" placeholder="Recordable Incidents" required><br><br>
-      <button type="submit">Submit</button>
-    </form>
+<head>
+  <title>Safety Metrics Submission</title>
+</head>
+<body>
+  <h2>Safety Metrics Submission</h2>
+  <form id="metricsForm">
+    <input type="text" name="month" placeholder="Month" required><br>
+    <input type="number" name="hours" placeholder="Total Hours Worked" required><br>
+    <input type="number" name="firstaid" placeholder="First Aid Cases" required><br>
+    <input type="number" name="ltis" placeholder="Lost Time Injuries" required><br>
+    <input type="number" name="recordables" placeholder="Recordable Injuries" required><br>
+    <button type="submit">Submit</button>
+  </form>
 
-    <script>
-      const scriptURL = 'https://script.google.com/macros/s/AKfycbzFTFlJqRQIIY6ebgMtRjRgEWFTMD8Is8RrVTttirq3Vpy2ztJvWmLiQ_FQv6tlRUs/exec
-';
-
-      document.getElementById('metricsForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const form = e.target;
-        const formData = new FormData(form);
-
-        fetch(scriptURL, {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => response.json())
-        .then(result => {
-          alert('Submitted successfully!');
-          form.reset();
-        })
-        .catch(error => alert("Error: " + error.message));
-      });
-    </script>
-  </body>
+  <script>
+    const form = document.getElementById("metricsForm");
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const data = new FormData(form);
+      fetch("https://script.google.com/macros/s/AKfycbxvatf4iyvPf8Io3aPYysZoPgH4DNIisxYlG-2dcIczTHKu3yb9cucs5zwRVRfpavGu/exec", {
+        method: "POST",
+        body: data
+      })
+      .then(response => response.text())
+      .then(msg => alert("Response: " + msg))
+      .catch(err => alert("Error: " + err));
+    });
+  </script>
+</body>
 </html>
