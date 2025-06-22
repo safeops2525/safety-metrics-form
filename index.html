@@ -1,108 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Safety Metrics Submission</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: #f8f9fa;
-    }
-    h2 {
-      color: #333;
-    }
-    form {
-      background: #fff;
-      padding: 20px;
-      border-radius: 6px;
-      max-width: 600px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    input {
-      width: 100%;
-      padding: 8px;
-      margin-top: 4px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      background-color: #28a745;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #218838;
-    }
-  </style>
-</head>
-<body>
-  <h2>Safety Metrics Submission</h2>
-  <form id="metricsForm">
-    <label for="month">Month</label>
-    <input type="text" id="month" name="month" required>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Safety Metrics Form</title>
+  </head>
+  <body>
+    <h2>Safety Metrics Submission</h2>
+    <form id="metricsForm">
+      <input type="text" id="month" name="month" placeholder="Month" required><br><br>
+      <input type="number" id="hours" name="hours" placeholder="Total Hours Worked" required><br><br>
+      <input type="number" id="firstaid" name="firstaid" placeholder="First Aid Cases" required><br><br>
+      <input type="number" id="ltis" name="ltis" placeholder="Lost Time Injuries" required><br><br>
+      <input type="number" id="recordables" name="recordables" placeholder="Recordable Incidents" required><br><br>
+      <button type="submit">Submit</button>
+    </form>
 
-    <label for="hours">Total Hours Worked</label>
-    <input type="number" id="hours" name="hours" required>
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbzFTFlJqRQIIY6ebgMtRjRgEWFTMD8Is8RrVTttirq3Vpy2ztJvWmLiQ_FQv6tlRUs/exec
+';
 
-    <label for="firstaid">First Aid Cases</label>
-    <input type="number" id="firstaid" name="firstaid" required>
+      document.getElementById('metricsForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
 
-    <label for="ltis">Lost Time Injuries (LTI)</label>
-    <input type="number" id="ltis" name="ltis" required>
-
-    <label for="recordables">Recordable Injuries</label>
-    <input type="number" id="recordables" name="recordables" required>
-
-    <button type="submit">Submit</button>
-  </form>
-
-  <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxvatf4iyvPf8Io3aPYysZoPgH4DNIisxYlG-2dcIczTHKu3yb9cucs5zwRVRfpavGu/exec';
-
-    document.addEventListener('DOMContentLoaded', function () {
-      const form = document.getElementById('metricsForm');
-      if (form) {
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-
-          const data = {
-            month: document.getElementById('month').value,
-            hours: document.getElementById('hours').value,
-            firstaid: document.getElementById('firstaid').value,
-            ltis: document.getElementById('ltis').value,
-            recordables: document.getElementById('recordables').value
-          };
-
-const formData = new FormData();
-formData.append("month", document.getElementById("month").value);
-formData.append("hours", document.getElementById("hours").value);
-formData.append("firstaid", document.getElementById("firstaid").value);
-formData.append("ltis", document.getElementById("ltis").value);
-formData.append("recordables", document.getElementById("recordables").value);
-
-fetch(scriptURL, {
-  method: 'POST',
-  body: formData
-})
-.then(response => response.json())
-.then(result => {
-  alert("Submitted successfully!");
-  form.reset();
-})
-.catch(error => {
-  alert("Error: " + error.message);
-});
-
-  </script>
-</body>
+        fetch(scriptURL, {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(result => {
+          alert('Submitted successfully!');
+          form.reset();
+        })
+        .catch(error => alert("Error: " + error.message));
+      });
+    </script>
+  </body>
 </html>
