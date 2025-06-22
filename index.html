@@ -1,42 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Safety Metrics Submission</title>
-</head>
-<body>
-  <h2>Safety Metrics Submission</h2>
-  <form id="metricsForm">
-    <input type="text" name="month" placeholder="Month" required><br>
-    <input type="number" name="hours" placeholder="Total Hours Worked" required><br>
-    <input type="number" name="firstaid" placeholder="First Aid Cases" required><br>
-    <input type="number" name="ltis" placeholder="Lost Time Injuries" required><br>
-    <input type="number" name="recordables" placeholder="Recordable Injuries" required><br>
-    <button type="submit">Submit</button>
-  </form>
+<h2>Safety Metrics Submission</h2>
+<form id="metricsForm">
+  <input type="text" id="month" name="month" placeholder="Month" required><br>
+  <input type="number" id="hours" name="hours" placeholder="Total Hours Worked" required><br>
+  <input type="number" id="firstaid" name="firstaid" placeholder="First Aid Cases" required><br>
+  <input type="number" id="ltis" name="ltis" placeholder="Lost Time Injuries" required><br>
+  <input type="number" id="recordables" name="recordables" placeholder="Recordable Injuries" required><br>
+  <button type="submit">Submit</button>
+</form>
 
-  <script>
-    const form = document.getElementById("metricsForm");
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      const data = {
-  month: document.getElementById("month").value,
-  hours: document.getElementById("hours").value,
-  firstaid: document.getElementById("firstaid").value,
-  ltis: document.getElementById("ltis").value,
-  recordables: document.getElementById("recordables").value
-};
-      fetch("https://script.google.com/macros/s/AKfycbxvatf4iyvPf8Io3aPYysZoPgH4DNIisxYlG-2dcIczTHKu3yb9cucs5zwRVRfpavGu/exec", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(data)
-})
-      })
-      .then(response => response.text())
-      .then(msg => alert("Response: " + msg))
-      .catch(err => alert("Error: " + err));
-    });
-  </script>
-</body>
-</html>
+<script>
+  const form = document.getElementById("metricsForm");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const data = {
+      month: document.getElementById("month").value,
+      hours: document.getElementById("hours").value,
+      firstaid: document.getElementById("firstaid").value,
+      ltis: document.getElementById("ltis").value,
+      recordables: document.getElementById("recordables").value
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbxvatf4ijyvPf8Io3aPYysZoPgH4DNltsxY1G-2dcIczTHKu3yb9cucc5zwRVRfpavGu/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then((res) => res.text())
+    .then((msg) => alert("Response: " + msg))
+    .catch((err) => alert("Error: " + err));
+  });
+</script>
