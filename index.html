@@ -83,24 +83,26 @@
             recordables: document.getElementById('recordables').value
           };
 
-          fetch(scriptURL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-          })
-          .then(response => response.json())
-          .then(result => {
-            alert("Submitted successfully!");
-            form.reset();
-          })
-          .catch(error => {
-            alert("Error: " + error.message);
-          });
-        });
-      }
-    });
+const formData = new FormData();
+formData.append("month", document.getElementById("month").value);
+formData.append("hours", document.getElementById("hours").value);
+formData.append("firstaid", document.getElementById("firstaid").value);
+formData.append("ltis", document.getElementById("ltis").value);
+formData.append("recordables", document.getElementById("recordables").value);
+
+fetch(scriptURL, {
+  method: 'POST',
+  body: formData
+})
+.then(response => response.json())
+.then(result => {
+  alert("Submitted successfully!");
+  form.reset();
+})
+.catch(error => {
+  alert("Error: " + error.message);
+});
+
   </script>
 </body>
 </html>
