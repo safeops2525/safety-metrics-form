@@ -25,23 +25,24 @@
     <button type="submit">Submit</button>
   </form>
 <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbx0U_PF9hjJ_mrC6flEak8iGaZPbpiTUPPo7QF3QQwZtVaBC3AsezHExC9gFznDSUvt/exec';
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzqEu3IxdH3_KAuKplU5AOWGSuyT-V81ueafNVtcoSEVvf6kycWObJL_rmGnF87edQv/exec';
 
-  document.getElementById('metricsForm')
-    .addEventListener('submit', function(e) {
-      e.preventDefault();
+document.getElementById('metricsForm')
+  .addEventListener('submit', function(e) {
+    e.preventDefault();
 
-      const form = document.getElementById('metricsForm');
-      const formData = new FormData(form);
+    const form = document.getElementById('metricsForm');
+    const formData = new FormData(form);
 
-      fetch(scriptURL, {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.text())
-      .then(result => alert("Submitted successfully!"))
-      .catch(error => alert("Error: " + error.message));
-    });
+    fetch(scriptURL, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.text())
+    .then(result => alert("Submitted successfully!"))
+    .catch(error => alert("Error: " + error.message));
+  });
+
 </script>
 
 </body>
